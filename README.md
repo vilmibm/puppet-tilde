@@ -68,6 +68,8 @@ To add users to your tilde server, add them to your common.yaml (or whatever) li
 The module purges any non-system users not managed by puppet; in other words,
 to ban a user, simply delete them from the tilde::users hash in common.yaml.
 
+You can also specify `pubkey_type` in the user hash if the user is fancy and not using `ssh-rsa`. The supported types are whatever is supported by puppet's [authorized key type](https://docs.puppetlabs.com/references/latest/type.html#sshauthorizedkey)
+
 ### Nginx
 
 This module sets up nginx (as opposed to httpd, which the original tilde.club
