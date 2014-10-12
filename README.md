@@ -9,28 +9,28 @@ Put it in /etc/puppet/modules. It's not on the Forge yet, sorry.
 
 Your site.pp should look something like this:
 
-        node 'tilde.town' {
+    node 'tilde.town' {
         
-          include tilde
+      include tilde
         
-          mount { '/':
-            ensure  => 'mounted',
-            device  => 'LABEL=cloudimg-rootfs',
-            dump    => '0',
-            fstype  => 'ext4',
-            options => 'defaults,discard,usrquota',
-            pass    => '0',
-            target  => '/etc/fstab',
-          }
-        }
+      mount { '/':
+        ensure  => 'mounted',
+        device  => 'LABEL=cloudimg-rootfs',
+        dump    => '0',
+        fstype  => 'ext4',
+        options => 'defaults,discard,usrquota',
+        pass    => '0',
+        target  => '/etc/fstab',
+      }
+    }
 
 The mount resource is specified so that we may set `usrquota`. This is needed
 for user disk quotas, which are set up automagically. If you don't want quotas
 (they are hardcoded to 3mb per user) disable them as so:
 
-        class { 'tilde':
-          use_quota => false,
-        }
+    class { 'tilde':
+        use_quota => false,
+    }
 
 instead of using `include tilde`.
 
@@ -41,15 +41,15 @@ instead of using `include tilde`.
 nginx module we use requires `puppet_module_data` to be enabled. Your
 hiera.yaml will end up looking something like this:
 
-        :hierarchy:
-          - common
+    :hierarchy:
+      - common
         
-        :backends:
-          - yaml
-          - module_data
+    :backends:
+      - yaml
+      - module_data
         
-        :yaml:
-          :datadir: /etc/puppet/hieradata
+    :yaml:
+      :datadir: /etc/puppet/hieradata
 
  
 
@@ -57,13 +57,13 @@ hiera.yaml will end up looking something like this:
 
 To add users to your tilde server, add them to your common.yaml (or whatever) like so:
 
-        tilde::users:
-          vilmibm:
-            pubkey: '...'
-          cmr:
-            pubkey: '...'
-          datagrok:
-            pubkey: '...'
+    tilde::users:
+      vilmibm:
+        pubkey: '...'
+      cmr:
+        pubkey: '...'
+      datagrok:
+        pubkey: '...'
 
 The module purges any non-system users not managed by puppet; in other words,
 to ban a user, simply delete them from the tilde::users hash in common.yaml.
@@ -74,23 +74,23 @@ You can also specify `pubkey_type` in the user hash if the user is fancy and not
 
 Currently, the module does **not** configure nginx for you all the way. It will (there is an open issue for this). Until that is ready, you can copy and paste the below config to get the tilde webserver experience. Just change `tilde.town` to whatever your hostname is:
 
-        nginx::nginx_vhosts:
-          'tilde.town':
-            use_default_location: false
-            server_name:
-              - 'www.tilde.town'
-              - 'tilde.town'
+    nginx::nginx_vhosts:
+      'tilde.town':
+        use_default_location: false
+        server_name:
+          - 'www.tilde.town'
+          - 'tilde.town'
             
-        nginx::nginx_locations:
-          'main':
-            location: '/'
-            vhost: 'tilde.town'
-            www_root: '/var/www/tilde.town'
+    nginx::nginx_locations:
+      'main':
+        location: '/'
+        vhost: 'tilde.town'
+        www_root: '/var/www/tilde.town'
         
-          'userContent':
-            location: '~ "^/~(.+?)(/.*)?$"'
-            vhost: 'tilde.town'
-            location_alias: '/home/$1/public_html$2'
+      'userContent':
+        location: '~ "^/~(.+?)(/.*)?$"'
+        vhost: 'tilde.town'
+        location_alias: '/home/$1/public_html$2'
 
 This sets up a homepage for your tilde server (`/var/www/<your
 domain>/index.html`) as well as the user directories (`/~<username>`).
