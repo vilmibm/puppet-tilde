@@ -1,8 +1,11 @@
-class tilde ($use_quota = true, $addtl_packages, $users) {
+class tilde ($use_quota = true, $addtl_packages = [], $users, $hostname) {
 
   include tilde::packages
-  include tilde::webserver
   include tilde::skel
+
+  class {'tilde::webserver':
+    hostname => $hostname,
+  }
 
   if ($use_quota) {
     include tilde::quota
