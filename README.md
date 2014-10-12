@@ -24,7 +24,7 @@ Your site.pp should look something like this:
           }
         }
 
-The mount resource is specified so that we may set `userquota`. This is needed
+The mount resource is specified so that we may set `usrquota`. This is needed
 for user disk quotas, which are set up automagically. If you don't want quotas
 (they are hardcoded to 3mb per user) disable them as so:
 
