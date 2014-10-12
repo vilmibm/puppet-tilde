@@ -53,7 +53,7 @@ or configure common.yaml with
 
     tilde::use_quota: false
 
-### Adding Users
+## Adding Users
 
 To add users to your tilde server, add them to your common.yaml (or whatever) like so:
 
@@ -73,7 +73,7 @@ fancy and not using `ssh-rsa`. The supported types are whatever is
 supported by puppet's
 [authorized key type](https://docs.puppetlabs.com/references/latest/type.html#sshauthorizedkey)
 
-### Nginx
+## Nginx
 
 Currently, the module looks for `tilde::hostname` (e.g. _tilde.town_
 or _tilde.farm_ or _drawbridge.club_) and sets up an nginx vhost with:
