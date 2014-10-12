@@ -10,7 +10,7 @@ class tilde::webserver ($hostname) {
   file { 'mainpage':
     ensure => file,
     path => "${www_root}/index.html",
-    content => "welcome to ${hostname}",
+    source => "puppet:///modules/${module_name}/main_index.html",
   }
 
   nginx::resource::vhost { $hostname:
