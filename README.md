@@ -72,9 +72,7 @@ You can also specify `pubkey_type` in the user hash if the user is fancy and not
 
 ### Nginx
 
-This module sets up nginx (as opposed to httpd, which the original tilde.club
-runs). Your configuration will look like this (feel free to copy and paste and
-just change the hostname):
+Currently, the module does **not** configure nginx for you all the way. It will (there is an open issue for this). Until that is ready, you can copy and paste the below config to get the tilde webserver experience. Just change `tilde.town` to whatever your hostname is:
 
         nginx::nginx_vhosts:
           'tilde.town':
