@@ -1,4 +1,4 @@
-class tilde ($use_quota = true) {
+class tilde ($use_quota = true, $addtl_packages, $users) {
 
   include tilde::webserver
   include tilde::skel
@@ -16,5 +16,6 @@ class tilde ($use_quota = true) {
     unless_system_user => true,
   }
 
-  create_resources(tilde::user, hiera('tilde::users'))
+  create_resources(tilde::user, $users)
+  create_resources(package, $addtl_packages)
 }
