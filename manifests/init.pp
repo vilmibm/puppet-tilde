@@ -17,6 +17,9 @@ class tilde ($use_quota = true, $addtl_packages, $users) {
     unless_system_user => true,
   }
 
+  package { $addtl_packages:
+    ensure => present,
+  }
+
   create_resources(tilde::user, $users)
-  create_resources(package, $addtl_packages)
 }
