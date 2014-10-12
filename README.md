@@ -82,6 +82,7 @@ or _tilde.farm_ or _drawbridge.club_) and sets up an nginx vhost with:
  * a homepage for your tilde server (`/var/www/<your
  domain>/index.html`)
  * user directories (`/~<username>`) which map to /home/<username>/public_html
+ * server names $hostname and www.$hostname
 
 ## Authors
 
