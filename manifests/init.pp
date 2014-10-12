@@ -1,5 +1,6 @@
 class tilde ($use_quota = true, $addtl_packages, $users) {
 
+  include tilde::packages
   include tilde::webserver
   include tilde::skel
 
