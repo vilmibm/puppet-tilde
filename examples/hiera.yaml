@@ -1,0 +1,11 @@
+# You should be able to copy this wholesale. Just don't forget to
+# mkdir /etc/puppet/hieradata.
+:hierarchy:
+  - common
+
+:backends:
+  - yaml
+  - module_data
+
+:yaml:
+  :datadir: /etc/puppet/hieradata

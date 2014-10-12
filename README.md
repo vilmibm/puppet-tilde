@@ -3,17 +3,35 @@
 This is an experimental, alpha Puppet module for setting up an ubuntu server in
 the style of [tilde.club](http://tilde.club).
 
-## example usage
+What is in master is generally guaranteed to have been tested casually
+on an ec2 micro running Ubuntu 14.04, but aside from that, there are
+no guarantees about the code. YMMV. I'm trying to keep the README up
+to date as I change things / add features.
 
-Put it in /etc/puppet/modules. It's not on the Forge yet, sorry.
+## Installation
 
-Your site.pp should look something like this:
+ _All of these steps assume you are running as the root user._
 
-    node 'tilde.town' {
-        
-      include tilde
-        
-      mount { '/':
+ * Install puppet and puppetmaster (they can be on the same
+   server). 3.4.x+ is required.
+ * `puppet module install nginx`
+ * Set up hiera:
+  * add a [hiera.yaml](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/hiera.yaml) to `/etc/puppet/`
+  * `ln -s /etc/puppet/hiera.yaml /etc/hiera.yaml`
+  * `mkdir /etc/puppet/hieradata`
+  * add and **configure** [common.yaml](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/common.yaml) to `/etc/puppet/hieradata/`
+ * `cd /etc/puppet/modules; git clone https://github.com/nathanielksmith/puppet-tilde.git tilde`
+ * edit [site.pp](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/site.pp)
+ * `puppet agent -t`
+
+
+## Quota support
+
+This module enables 3mb user quotas for all non-system users. You'll
+need to add the usrquota option to your / mount with something like
+this in your `site.pp`, though, for it to work:
+
+    mount { '/':
         ensure  => 'mounted',
         device  => 'LABEL=cloudimg-rootfs',
         dump    => '0',
@@ -24,36 +42,18 @@ Your site.pp should look something like this:
       }
     }
 
-The mount resource is specified so that we may set `usrquota`. This is needed
-for user disk quotas, which are set up automagically. If you don't want quotas
-(they are hardcoded to 3mb per user) disable them as so:
+If you **do not want disk quotas**, include the tilde class like this
+in your `site.pp`:
 
     class { 'tilde':
         use_quota => false,
     }
 
-instead of using `include tilde`.
+or configure common.yaml with
 
-## Configuration
+    tilde::use_quota: false
 
-**You'll need to set up hiera data**. See the great docs
-[here](https://docs.puppetlabs.com/hiera/1/puppet.html). Also note that the
-nginx module we use requires `puppet_module_data` to be enabled. Your
-hiera.yaml will end up looking something like this:
-
-    :hierarchy:
-      - common
-        
-    :backends:
-      - yaml
-      - module_data
-        
-    :yaml:
-      :datadir: /etc/puppet/hieradata
-
- 
-
-### Users
+### Adding Users
 
 To add users to your tilde server, add them to your common.yaml (or whatever) like so:
 
@@ -68,32 +68,20 @@ To add users to your tilde server, add them to your common.yaml (or whatever) li
 The module purges any non-system users not managed by puppet; in other words,
 to ban a user, simply delete them from the tilde::users hash in common.yaml.
 
-You can also specify `pubkey_type` in the user hash if the user is fancy and not using `ssh-rsa`. The supported types are whatever is supported by puppet's [authorized key type](https://docs.puppetlabs.com/references/latest/type.html#sshauthorizedkey)
+You can also specify `pubkey_type` in the user hash if the user is
+fancy and not using `ssh-rsa`. The supported types are whatever is
+supported by puppet's
+[authorized key type](https://docs.puppetlabs.com/references/latest/type.html#sshauthorizedkey)
 
 ### Nginx
 
-Currently, the module does **not** configure nginx for you all the way. It will (there is an open issue for this). Until that is ready, you can copy and paste the below config to get the tilde webserver experience. Just change `tilde.town` to whatever your hostname is:
+Currently, the module looks for `tilde::hostname` (e.g. _tilde.town_
+or _tilde.farm_ or _drawbridge.club_) and sets up an nginx vhost with:
 
-    nginx::nginx_vhosts:
-      'tilde.town':
-        use_default_location: false
-        server_name:
-          - 'www.tilde.town'
-          - 'tilde.town'
-            
-    nginx::nginx_locations:
-      'main':
-        location: '/'
-        vhost: 'tilde.town'
-        www_root: '/var/www/tilde.town'
-        
-      'userContent':
-        location: '~ "^/~(.+?)(/.*)?$"'
-        vhost: 'tilde.town'
-        location_alias: '/home/$1/public_html$2'
 
-This sets up a homepage for your tilde server (`/var/www/<your
-domain>/index.html`) as well as the user directories (`/~<username>`).
+ * a homepage for your tilde server (`/var/www/<your
+ domain>/index.html`)
+ * user directories (`/~<username>`) which map to /home/<username>/public_html
 
 ## Authors
 
@@ -103,4 +91,4 @@ domain>/index.html`) as well as the user directories (`/~<username>`).
 ## License
 
 This module is licensed under the terms of the GNU Public License version 3
-(GPLv3) 
+(GPLv3)

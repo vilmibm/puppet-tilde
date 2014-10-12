@@ -1,0 +1,19 @@
+# REQUIRED. This sets up the webserver.
+tilde::hostname: tilde.town
+
+# OPTIONAL. This allows you to customize the package listing for your
+# server. The default packages are in manifests/packages.pp.
+tilde::addtl_packages:
+  - angband
+
+# REQUIRED (if you want users other than root :) ). Each entry here
+#  also supports a pubkey_type field in case the user isn't using
+#  ssh-rsa. Check the docs on puppet's authorized_key type to see what
+#  is supported.
+tilde::users:
+  vilmibm:
+    pubkey: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Qcos5+YfdjSpjd0yitfMToo6N/XRvSVFxFxqSXw2knWhlDfBUGzx2WUg/qd25s5BxRyUGbr4+PuH9W9rAu7cC+HKL3RzV+inBNUOSjaz2lCFAmz4C0ypP6dcBNk63r6g2Yhg1R4tFSUJzROFQRPrJuRv58qXbvEkwwxcc+Awmu8T3FbV1e+HSw0D1ZcbrUJP9t4p2uMwIPlaYji/6JuwrcHJLNHojclV7AA0QSewAX3Z742OmU35HtnqyYFPDSOWRDqisnj0JOT8Ltnv9jzKasbXWfhNQ2lPL7UFCuM3Ceq4p6uHQWJ9hxvlyY7+b7Du+xPzmL7Lt7/zvmTOQInN'
+  cmr:
+    pubkey: 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDNzQksVp+bpCyCGQMIiQKb10hWU0kv+9yUQ7K5zF1mzucfo4pOCgmkr8tsSMCxuIl3m0IyFCycqQjsX6YSRk/AaSDbdY0oK7ShxhMeuYwP3+RJVLzlaHKoDiCZUs1PoCE0/79C6onXdeoXSzaMbn7KOB7K0jaH1QgJLlhXxAybQzsur/gGgVgphBWs0rD/Rcq5Esg5DFOQIKBAxJ0wlVGQXz1o2S1SnD1ALPCdy55LnRKXYhVOGiybyV15nSL85bhXBu8WbJVxdgmyWlUf+qCL2AXArZfQd+5LCx6SFOm4Fd24B/wETY9ANjwgJlh1EWQE0sqHCedgfn9/u/GHEnoctTLz/n1CXNNy8sOY0YWmA/18f0rWMPqmpNSqWDAsbAHzhY1Gs0jyT6r8ZXLJzi5q316m2lA4UGSxcGg5m5pTsdbiJ5HUwrCO8qbsJ9Vwe2G2zUbMmsnNGVio7bK0aICxVqDgt0f2Kh7Tma83BTDCoXhCTYOMWr9EkhJco/Uw3bJiI/OTCzNM0p7x8aJHdlTQZ6agsG2PZICaC7VI6y9G3MLuwgEnKmT814iVkd5QirXwEqS8gkPzpNjup/Ok06GiAtCPZ4K/xvfFzXFsX4GI9y04nCILXy+RbioIqSGg2WL2mB2c6beigfcPyZ0HNgFbGqQVZ++NMsgfm5Um64wpDQ=='
+  datagrok:
+    pubkey: 'AAAAB3NzaC1yc2EAAAADAQABAAACAQDequggbcM0AnNTdMz8k/Am8AGyV/TVdm3cjrlgDTs2skna8gNvgD+rwM7ZY6jUgkbegM960qoILbrbd1c4bmv+cEPcbEDH6gxXcKcKt7rfamcR8kQY6FKwrKZ3DrUSz0PEFrcKbH7P+DZhTHNIvdpTN3sJ27/XUtJn8xB38+0F/zwfpIPNTRNquGxz9zuumV9F6UkLh0Ea9EGWMfRoNBgNgO4Dvx84XTZ7d3s3b0c8yaInVlwbUV+3bBdsGneBGYXbn3/mzP24dgprzVny4JkVGLc7Ua3ijx1gMs5ubpuh86XP52ERS8UvuQAkeV0OILPTOydt1uRFDxc72tIATbAwt5nSSl8yDPQ9icOFbQoxQyt3VuKrW7DVWukhhdIaZxlcvBFp8/iCk82STjdvAQ6OH9yALB4xvJVORkwYusjD2ifoTSDy4XvD7tx9RmAwBWaytJBcObBGnlUPCMJ1IivaoYwNST3DoXK8ukNG3rHl2HwM/QzIg9H/ZZ5Y4JmCvw2E4KHhgzD8fEtbQid3+FkCspm20KIwqPDETEuTmLgE90OxlCpo6X3tm0IZvYunP0cfe8fzfZaTa52jteOHdBq+DzviDaQSEkO5EfxN0FmxwKZB/5jbfZw/I1uJdH7xDW+A7E0eiKWSZ9PKsWvWkfCzr+xj9JdNSL+hA8tlMZhMGw=='
