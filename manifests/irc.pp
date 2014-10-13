@@ -1,4 +1,4 @@
-class tilde::irc ($channel) {
+class tilde::irc {
 
   $channel = regsubst($tilde::hostname, '\.', '')
 
