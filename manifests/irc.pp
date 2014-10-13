@@ -1,6 +1,6 @@
 class tilde::irc ($channel) {
 
-  $channel = regsubst($tilde::hostname, '\.', ''),
+  $channel = regsubst($tilde::hostname, '\.', '')
 
   class { 'ngircd':
     server_name => 'localhost',
