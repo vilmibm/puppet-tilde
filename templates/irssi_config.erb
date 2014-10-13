@@ -11,10 +11,10 @@ servers = (
   }
 );
 
-chatnets = { tilde = { type = "IRC"; autosendcmd = "JOIN #<%= channel %>"; }; };
+chatnets = { tilde = { type = "IRC"; autosendcmd = "JOIN #<%= @channel %>"; }; };
 
 channels = (
-  { name = "#<%= channel %>"; chatnet = "tilde"; autojoin = "Yes"; }
+  { name = "#<%= @channel %>"; chatnet = "tilde"; autojoin = "Yes"; }
 );
 
 aliases = {

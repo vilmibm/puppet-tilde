@@ -2,10 +2,8 @@ class tilde ($use_quota = true, $addtl_packages = [], $users, $hostname) {
 
   include tilde::packages
   include tilde::skel
+  include tilde::irc
 
-  class {'tilde::irc':
-    channel => regsubst($hostname, '\.', ''),
-  }
   class {'tilde::webserver':
     hostname => $hostname,
   }

@@ -2,6 +2,8 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
 
   $username = $title
 
+  $channel = $tilde::irc::channel
+
   user { $username:
     ensure => present,
     managehome => true, # pick up our skel
