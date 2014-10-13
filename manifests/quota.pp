@@ -14,7 +14,7 @@ class tilde::quota {
     command => '/sbin/modprobe quota_v2',
     refreshonly => true,
   }
-    
+
   exec { 'quotas':
     require => Package['linux-image-extra-virtual'],
     command => '/sbin/quotacheck -cum /',
@@ -27,18 +27,4 @@ class tilde::quota {
     command => '/sbin/quotaon /',
     refreshonly => true,
   }
-
-#  user { 'quotauser':
-#    ensure => present,
-#    notify => Exec['setquotatemplate']
-#  }
-
-#  exec { 'setquotatemplate':
-#    command => '/usr/sbin/setquota -u quotauser 3112 3500 0 0 -a',
-#  }
-
-#  file_line { 'quotauseradduser':
-#    path => '/etc/adduser.conf',
-#    line => 'QUOTAUSER=quotauser',  
-#  }
 }
