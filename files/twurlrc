@@ -1,0 +1,13 @@
+---
+profiles:
+  tildetown:
+    9oYuKlWy2xLbiC0FXzdVldHsz:
+      username: tildetown
+      consumer_key: 9oYuKlWy2xLbiC0FXzdVldHsz
+      consumer_secret: 6qixs8JBpDWhHrlTHUNzqICit6GeuA1loej15msw0IUe5DOi4h
+      token: 2877343939-CEn1l5iyyumjWsOEeSUOxAOOTac2pMvSPGSigzp
+      secret: hBGcC6txyn3JdMqqRvnnPGXIehW7IMXmBZZHLWnc2xtVH
+configuration:
+  default_profile:
+  - tildetown
+  - 9oYuKlWy2xLbiC0FXzdVldHsz

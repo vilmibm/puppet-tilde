@@ -19,6 +19,23 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
     target => "${home}/.ssh/authorized_keys2",
   }
 
+  file { "${username}/.ssh":
+    path => "/home/${username}/.ssh",
+    ensure => directory,
+    owner => $username,
+    group => $username,
+  }
+
+  file { "${username}_poetry_key":
+    require => File["${username}/.ssh"],
+    ensure => file,
+    path => "/home/${username}/.ssh/poetry",
+    owner => $username,
+    group => $username,
+    mode => 600,
+    source => "puppet:///modules/tilde/poetry_key",
+  }
+
   exec { "${username}_setquota":
     command => "/usr/sbin/setquota -u ${username} 20000 25000 0 0 -a",
     refreshonly => true,
@@ -40,5 +57,19 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
     replace => false,
   }
 
+  # custom to tilde.town
 
+  file { "/home/${username}/.twurlrc":
+    ensure => file,
+    owner => $username,
+    group => $username,
+    replace => false,
+    source => "puppet:///modules/tilde/twurlrc",
+  }
+
+  exec { "${username} welcome present":
+    command => "/usr/local/bin/welcome_present ${username}",
+    creates => "/home/${username}/welcome_${username}",
+    require => User[$username],
+  }
 }
