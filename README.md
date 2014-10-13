@@ -4,7 +4,7 @@ This is an experimental, alpha Puppet module for setting up an ubuntu server in
 the style of [tilde.club](http://tilde.club).
 
 What is in master is generally guaranteed to have been tested casually
-on an ec2 micro running Ubuntu 14.04, but aside from that, there are
+on an ec2 micro running Ubuntu 14.04 at [tilde.town](http://tilde.town), but aside from that, there are
 no guarantees about the code. YMMV. I'm trying to keep the README up
 to date as I change things / add features.
 
