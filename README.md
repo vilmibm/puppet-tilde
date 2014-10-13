@@ -81,7 +81,7 @@ mail only. Alpine and mutt are installed by default.
 There is basic Message of the Day support. To customize the motd, make
 a branch of the checked out puppet module and edit
 `templates/motd.erb`. The default template just has a basic cowsay
-with a few instructions (and shows your hostnaem).
+with a few instructions (and shows your server's hostname).
 
 A `motd` alias that just runs `cat /etc/motd` is also added by the
 aliases file in skel.
