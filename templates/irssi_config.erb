@@ -11,10 +11,10 @@ servers = (
   }
 );
 
-chatnets = { tilde = { type = "IRC"; autosendcmd = "JOIN #tildefarm"; }; };
+chatnets = { tilde = { type = "IRC"; autosendcmd = "JOIN #<%= channel %>"; }; };
 
 channels = (
-  { name = "#tildefarm"; chatnet = "tilde"; autojoin = "Yes"; }
+  { name = "#<%= channel %>"; chatnet = "tilde"; autojoin = "Yes"; }
 );
 
 aliases = {
@@ -182,4 +182,3 @@ settings = {
   core = { real_name = "<%= @user %>"; user_name = "<%= @user %>"; nick = "<%= @user %>"; };
   "fe-text" = { actlist_sort = "refnum"; };
 };
-
