@@ -42,7 +42,7 @@ filetype indent on    " enable language-depenent indentation
 syntax enable
 set background=dark
 set t_Co=256
-colorscheme darkelf
+colorscheme elflord
 highlight clear SignColumn
 
 let ruby_space_errors=1   " highlight tab/space mixing in ruby files
