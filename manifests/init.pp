@@ -26,5 +26,13 @@ class tilde ($use_quota = true, $addtl_packages = [], $users, $hostname) {
     ensure => present,
   }
 
+  file { "/etc/motd":
+    ensure => file,
+    owner => root,
+    group => root,
+    mode => '0665',
+    content => template("${module_name}/motd.erb")
+  }
+
   create_resources(tilde::user, $users)
 }
