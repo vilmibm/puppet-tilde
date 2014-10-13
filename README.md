@@ -20,7 +20,9 @@ to date as I change things / add features.
   * `ln -s /etc/puppet/hiera.yaml /etc/hiera.yaml`
   * `mkdir /etc/puppet/hieradata`
   * add and **configure** [common.yaml](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/common.yaml) to `/etc/puppet/hieradata/`
- * `cd /etc/puppet/modules; git clone https://github.com/nathanielksmith/puppet-tilde.git tilde`
+ * `cd /etc/puppet/modules`
+ * `git clone https://github.com/nathanielksmith/puppet-tilde.git tilde`
+ * `git clone https://github.com/nathanielksmith/puppet-ngircd ngircd`
  * edit [site.pp](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/site.pp)
  * `puppet agent -t`
 
