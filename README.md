@@ -76,6 +76,16 @@ autonomous collective to determine.
 The module sets up postfix for you. Just like tilde.club, it's local
 mail only. Alpine and mutt are installed by default.
 
+## MotD
+
+There is basic Message of the Day support. To customize the motd, make
+a branch of the checked out puppet module and edit
+`templates/motd.erb`. The default template just has a basic cowsay
+with a few instructions (and shows your hostnaem).
+
+A `motd` alias that just runs `cat /etc/motd` is also added by the
+aliases file in skel.
+
 ## Quota support
 
 This module enables 3mb user quotas for all non-system users. You'll
