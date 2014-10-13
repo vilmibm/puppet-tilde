@@ -1,8 +1,7 @@
 class tilde::mail {
-  include postfix
 
-  postfix::config { 'inet_interfaces':
-    value => 'localhost'
+  class {'postfix':
+    inet_interfaces => 'localhost',
   }
 
   postfix::config { 'default_transport':
