@@ -47,6 +47,16 @@ fancy and not using `ssh-rsa`. The supported types are whatever is
 supported by puppet's
 [authorized key type](https://docs.puppetlabs.com/references/latest/type.html#sshauthorizedkey)
 
+Password based logins are not currently supported. You'll have to
+manually enable that if you want it.
+
+## /etc/skel
+
+/etc/skel is managed as a set of files in the module. If you'd like to
+modify these, make a local branch on the module and edit away. You can
+add or remove files from the directory (note, old users will not
+retroactively get changes to /etc/skel).
+
 ## Nginx
 
 Currently, the module looks for `tilde::hostname` (e.g. _tilde.town_
@@ -86,6 +96,22 @@ with a few instructions (and shows your server's hostname).
 A `motd` alias that just runs `cat /etc/motd` is also added by the
 aliases file in skel.
 
+## NNTP
+
+`inn2` is set up and configured for local access. the client `slrn` is
+installed by default. The following groups are installed:
+
+ * local.tilde
+ * local.html
+ * local.music
+
+Admins can add more groups with `ctlinnd newgroup local.tilde`.
+
+**WARNING** I have barely tested the NNTP stuff with slrn. I would
+love for a seasoned usenet user to come to
+[tilde.town](http://tilde.town) and help me test things. As far as I
+can tell, however, things are working okay.
+
 ## Quota support
 
 This module enables 3mb user quotas for all non-system users. You'll
@@ -113,6 +139,13 @@ in your `site.pp`:
 or configure common.yaml with
 
     tilde::use_quota: false
+
+## TODO
+
+ * A "customization" section in this README on how to modify things
+   like the server's homepage or /etc/skel.
+ * Flags for switching on/off various services from common.yaml (if
+   you don't want NTTP, for example).
 
 ## Authors
 
