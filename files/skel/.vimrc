@@ -45,16 +45,13 @@ set t_Co=256
 colorscheme elflord
 highlight clear SignColumn
 
-let ruby_space_errors=1   " highlight tab/space mixing in ruby files
 highlight RedundantSpaces ctermbg=red
 match RedundantSpaces /\s\+$\| \+\ze\t\|\t/
 
 set number  " line numbers
 set scrolloff=5
-let loaded_matchparen=1
 set hidden
 
 set nobackup
-set noswapfile
 
 set pastetoggle=<F2>
