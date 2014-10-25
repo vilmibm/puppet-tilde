@@ -4,6 +4,7 @@ class tilde::irc {
 
   class { 'ngircd':
     server_name => 'localhost',
+    max_nick_length => 20,
     dns => 'no',
   }
 
