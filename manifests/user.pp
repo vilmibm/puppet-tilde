@@ -19,7 +19,7 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
   }
 
   exec { "${username}_setquota":
-    command => "/usr/sbin/setquota -u ${username} 3112 4000 0 0 -a",
+    command => "/usr/sbin/setquota -u ${username} 20000 25000 0 0 -a",
     refreshonly => true,
   }
 
