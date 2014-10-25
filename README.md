@@ -24,7 +24,7 @@ to date as I change things / add features.
  * `cd /etc/puppet/modules`
  * `git clone https://github.com/nathanielksmith/puppet-tilde.git tilde`
  * `git clone https://github.com/nathanielksmith/puppet-ngircd ngircd`
- * edit [site.pp](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/site.pp)
+ * edit [site.pp](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/site.pp) and save to `/etc/puppet/manifests/site.pp`
  * `puppet agent -t`
 
 ## Adding Users
