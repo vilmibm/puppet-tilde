@@ -17,7 +17,6 @@ tilde::addtl_packages:
 tilde::newspeers:
   - news.tilde.club
 
-
 # OPTIONAL. This is the list of newsgroups you want made
 # available. These will be created and then fed by other servers who
 # publish them. This list here (as of 10/26/14) reflects the groups on
