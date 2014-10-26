@@ -1,15 +1,15 @@
-define tilde::nntp::newsgroup ($name) {
+define tilde::nntp::newsgroup () {
   # TODO the paths for inn stuff in here will change based on
   # platform.
 
-  exec { "add ${name}":
-    command => "/usr/lib/bin/news/ctlinnd newgroup ${name}",
-    unless => "/bin/grep ${name} /var/lib/news/active",
+  exec { "add ${title}":
+    command => "/usr/sbin/ctlinnd newgroup ${title}",
+    unless => "/bin/grep ${title} /var/lib/news/active",
   }
 
-  file_line { "subscriptions ${name}":
+  file_line { "subscriptions ${title}":
     path => '/etc/news/subscriptions',
-    line => $name,
+    line => $title,
   }
 
 }

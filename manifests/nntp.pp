@@ -1,4 +1,4 @@
-class tilde::nntp ($hostname) {
+class tilde::nntp ($hostname, $newsgroups = [], $peers = []) {
 
   package { ['inn2', 'slrn', 'tin']:
     ensure => installed,
@@ -16,6 +16,24 @@ class tilde::nntp ($hostname) {
     source => "puppet:///modules/${module_name}/readers.conf",
   }
 
+  file { '/etc/news/incoming.conf':
+    ensure => file,
+    require => Package['inn2'],
+    content => template("${module_name}/incoming.conf.erb"),
+  }
+
+  file { '/etc/news/newsfeeds':
+    ensure => file,
+    require => Package['inn2'],
+    content => template("${module_name}/newsfeeds.erb"),
+  }
+
+  file { '/etc/news/server':
+    ensure => file,
+    require => Package['inn2'],
+    content => $hostname,
+  }
+
   service { 'inn2':
     ensure => running,
     subscribe => [ File['/etc/news/inn.conf'], File['/etc/news/readers.conf'] ],
@@ -27,5 +45,9 @@ class tilde::nntp ($hostname) {
     command => '/usr/lib/news/bin/expireover lowmark',
     user => 'news',
     hour => 23,
+  }
+
+  tilde::nntp::newsgroup { $newsgroups:
+    require => Package['inn2'],
   }
 }
