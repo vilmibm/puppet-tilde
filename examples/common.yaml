@@ -6,6 +6,37 @@ tilde::hostname: tilde.town
 tilde::addtl_packages:
   - angband
 
+# OPTIONAL. This is for configuring usenet. Usenet is installed by
+# default (in the future it will be toggle-able off) but left
+# unconfigured.
+# This is the list of other tilde servers from whom you want to pull
+# newsgroups.  They will have to have you listed as a peer on their
+# server in order to pull in your content.
+# As of 10/26/14 the only usenet-able tildes are tilde.town and
+# tilde.club.
+tilde::newspeers:
+  - news.tilde.club
+
+
+# OPTIONAL. This is the list of newsgroups you want made
+# available. These will be created and then fed by other servers who
+# publish them. This list here (as of 10/26/14) reflects the groups on
+# tilde.town and tilde.club.
+#
+# If you want to add a group that is local only, prefix it with local
+# (as in "local.gnarlytimes"). These groups will not be made available
+# to servers who consider you a peer.
+tilde::newsgroups:
+  - tilde.town.poetry
+  - tilde.town.python
+  - tilde.food+drink
+  - tilde.general
+  - tilde.projects
+  - tilde.meetups
+  - tilde.ascii
+  - tilde.town
+  - tilde.blogs
+
 # REQUIRED (if you want users other than root :) ). Each entry here
 #  also supports a pubkey_type field in case the user isn't using
 #  ssh-rsa. Check the docs on puppet's authorized_key type to see what

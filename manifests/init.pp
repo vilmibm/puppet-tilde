@@ -1,4 +1,11 @@
-class tilde ($use_quota = true, $addtl_packages = [], $users, $newsgroups, $hostname, $newspeers) {
+class tilde (
+  $users,
+  $hostname,
+  $use_quota = true,
+  $addtl_packages = [],
+  $newsgroups = [],
+  $newspeers = []
+) {
 
   include tilde::packages
   include tilde::mail
@@ -11,7 +18,7 @@ class tilde ($use_quota = true, $addtl_packages = [], $users, $newsgroups, $host
     peers => $newspeers,
   }
 
-  class {'tilde::webserver':
+  class { 'tilde::webserver':
     hostname => $hostname,
   }
 
