@@ -1,4 +1,4 @@
-class tilde ($use_quota = true, $addtl_packages = [], $users, $hostname) {
+class tilde ($use_quota = true, $addtl_packages = [], $users, $newsgroups, $hostname) {
 
   include tilde::packages
   include tilde::mail
@@ -39,4 +39,5 @@ class tilde ($use_quota = true, $addtl_packages = [], $users, $hostname) {
   }
 
   create_resources(tilde::user, $users)
+  create_resources(tilde::nntp::newsgroup, $newsgroups)
 }
