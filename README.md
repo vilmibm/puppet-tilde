@@ -98,7 +98,7 @@ aliases file in skel.
 
 ## NNTP (Usenet)
 
-The program `inn2` is set up and configured for local access. The clients `slrn`, `tin`, and `alpine` are all installed by default. In order to transfer news between servers, you must enable both inbound and outbound traffic on TCP port 119 (for EC2 users, this may mean editing your security groups, for others it may mean editing iptables rules).
+The program `inn2` is set up and configured for local access. The clients `slrn`, `tin`, and `alpine` are all installed by default. In order to transfer news with peers, you must enable both inbound and outbound traffic on TCP port 119 (for EC2 users, this may mean editing your security groups, for others it may mean editing iptables rules).
 
 **IMPORTANT**: Refer to [the example common.yaml file](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/common.yaml) to see how to configure newsgroups/peers. No groups are configured by default.
 
