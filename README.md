@@ -96,21 +96,11 @@ with a few instructions (and shows your server's hostname).
 A `motd` alias that just runs `cat /etc/motd` is also added by the
 aliases file in skel.
 
-## NNTP
+## NNTP (Usenet)
 
-`inn2` is set up and configured for local access. the client `slrn` is
-installed by default. The following groups are installed:
+`inn2` is set up and configured for local access. the client `slrn`, `tin`, and `alpine` are all installed by default.
 
- * local.tilde
- * local.html
- * local.music
-
-Admins can add more groups with `ctlinnd newgroup local.tilde`.
-
-**WARNING** I have barely tested the NNTP stuff with slrn. I would
-love for a seasoned usenet user to come to
-[tilde.town](http://tilde.town) and help me test things. As far as I
-can tell, however, things are working okay.
+**IMPORTANT**: Refer to [the example common.yaml file](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/common.yaml) to see how to configure newsgroups/peers. No groups are configured by default.
 
 ## Quota support
 
