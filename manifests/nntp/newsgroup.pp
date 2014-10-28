@@ -5,6 +5,7 @@ define tilde::nntp::newsgroup () {
   exec { "add ${title}":
     command => "/usr/sbin/ctlinnd newgroup ${title}",
     unless => "/bin/grep ${title} /var/lib/news/active",
+    notify => Service['inn2'],
   }
 
   file_line { "subscriptions ${title}":

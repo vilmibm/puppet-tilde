@@ -1,5 +1,9 @@
 class tilde::nntp ($hostname, $newsgroups = [], $peers = []) {
 
+  File {
+    notify => Service['inn2'],
+  }
+
   package { ['inn2', 'slrn', 'tin']:
     ensure => installed,
   }
@@ -36,8 +40,7 @@ class tilde::nntp ($hostname, $newsgroups = [], $peers = []) {
 
   service { 'inn2':
     ensure => running,
-    subscribe => [ File['/etc/news/inn.conf'], File['/etc/news/readers.conf'] ],
-    pattern => 'innd',
+    status => '/usr/sbin/innstat | /bin/grep "Server running"',
   }
 
   cron { 'expirenews':
