@@ -67,6 +67,7 @@ or _tilde.farm_ or _drawbridge.club_) and sets up an nginx vhost with:
  domain>/index.html`)
  * user directories (`/~<username>`) which map to /home/<username>/public_html
  * server names $hostname and www.$hostname
+ * **IMPORTANT** Make sure port 80 is open for your server.
 
 ## IRC
 
@@ -99,6 +100,8 @@ aliases file in skel.
 ## NNTP (Usenet)
 
 `inn2` is set up and configured for local access. the client `slrn`, `tin`, and `alpine` are all installed by default.
+
+**IMPORTANT**: Make sure port 119 is open for your server.
 
 **IMPORTANT**: Refer to [the example common.yaml file](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/common.yaml) to see how to configure newsgroups/peers. No groups are configured by default.
 
