@@ -16,6 +16,7 @@ tilde::addtl_packages:
 # tilde.club.
 tilde::newspeers:
   - news.tilde.club
+  - drawbridge.club
 
 # OPTIONAL. This is the list of newsgroups you want made
 # available. These will be created and then fed by other servers who
@@ -26,8 +27,13 @@ tilde::newspeers:
 # (as in "local.gnarlytimes"). These groups will not be made available
 # to servers who consider you a peer.
 tilde::newsgroups:
+  # local (in this example. you'll want a tilde.town entry up in newspeers)
   - tilde.town.poetry
   - tilde.town.python
+  # drawbridge.club
+  - tilde.drawbridge.club
+  - tilde.drawbridge.games
+  # tilde.club
   - tilde.food+drink
   - tilde.general
   - tilde.projects
