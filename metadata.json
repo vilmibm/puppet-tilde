@@ -1,0 +1,14 @@
+{
+  "name": "vilmibm-tilde",
+  "version": "0.1.0",
+  "author": "vilmibm",
+  "summary": "Set up an ubuntu server like a tilde node",
+  "license": "GNU Public License, Version 3.0",
+  "source": "UNKNOWN",
+  "project_page": "https://github.com/nathanielksmith/puppet-tilde",
+  "issues_url": null,
+  "description": "Set up an ubuntu server like a tilde node",
+  "dependencies": [
+     { "name": "jfryman/nginx", "version_requirement": "0.1.1" }
+  ]
+}
