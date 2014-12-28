@@ -99,7 +99,7 @@ aliases file in skel.
 
 ## NNTP (Usenet)
 
-`inn2` is set up and configured for local access. the client `slrn`, `tin`, and `alpine` are all installed by default.
+The program `inn2` is set up and configured for local access. The clients `slrn`, `tin`, and `alpine` are all installed by default. In order to transfer news with peers, you must enable both inbound and outbound traffic on TCP port 119 (for EC2 users, this may mean editing your security groups, for others it may mean editing iptables rules).
 
 **IMPORTANT**: Make sure port 119 is open for your server.
 
