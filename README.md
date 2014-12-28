@@ -14,7 +14,7 @@ to date as I change things / add features.
 
  * Install puppet and puppetmaster (they can be on the same
    server). 3.4.x+ is required.
- * `puppet module install jfryman-nginx`
+ * `puppet module install jfryman-nginx -v 0.0.10` (must install v0.0.10, [see here](https://github.com/jfryman/puppet-nginx/issues/460))
  * `puppet module install camptocamp-postfix`
  * Set up hiera:
   * add a [hiera.yaml](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/hiera.yaml) to `/etc/puppet/`
