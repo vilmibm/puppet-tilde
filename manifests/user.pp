@@ -1,7 +1,7 @@
 define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
 
   $username = $title
-
+  $home = "/home/${username}"
   $channel = $tilde::irc::channel
 
   user { $username:
@@ -13,9 +13,10 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
   }
 
   ssh_authorized_key { "${username}_default":
-    user => $username,
-    type => $pubkey_type,
-    key  => $pubkey,
+    user   => $username,
+    type   => $pubkey_type,
+    key    => $pubkey,
+    target => "${home}/.ssh/authorized_keys2",
   }
 
   exec { "${username}_setquota":
@@ -23,14 +24,14 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
     refreshonly => true,
   }
 
-  file { "/home/${username}/.irssi":
+  file { "${home}/.irssi":
     ensure => directory,
     owner => $username,
     group => $username,
     mode => '0700',
   }
 
-  file { "/home/${username}/.irssi/config":
+  file { "${home}/.irssi/config":
     ensure => file,
     owner => $username,
     group => $username,
