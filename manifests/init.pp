@@ -25,15 +25,15 @@ class tilde (
     mode => '0777'
   }
 
-  mount { '/':
-    ensure  => 'mounted',
-    device  => 'LABEL=cloudimg-rootfs',
-    dump    => '0',
-    fstype  => 'ext4',
-    options => 'defaults,discard,usrquota',
-    pass    => '0',
-    target  => '/etc/fstab',
-  }
+ # mount { '/':
+ #   ensure  => 'mounted',
+ #   device  => 'LABEL=cloudimg-rootfs',
+ #   dump    => '0',
+ #   fstype  => 'ext4',
+ #   options => 'defaults,discard,usrquota',
+ #   pass    => '0',
+ #   target  => '/etc/fstab',
+ # }
 
 
 

@@ -3,8 +3,9 @@ class tilde::webserver ($hostname) {
 
   $www_root = "/var/www/${hostname}"
 
-  $userlist = generate("/usr/local/bin/generate_userlist")
-  $active_user_count = generate("/usr/local/bin/active_users")
+  #$userlist = generate("/usr/local/bin/generate_userlist")
+  $userlist = "under construction :3"
+  $active_user_count = $::active_user_count
 
   file { ['/var/www', $www_root]:
     ensure => directory,
