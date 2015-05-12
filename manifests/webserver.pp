@@ -3,18 +3,23 @@ class tilde::webserver ($hostname) {
 
   $www_root = "/var/www/${hostname}"
 
-  $userlist = generate("/usr/local/bin/generate_userlist")
-  $active_user_count = generate("/usr/local/bin/active_users")
-
   file { ['/var/www', $www_root]:
     ensure => directory,
   }
 
-  file { 'mainpage':
+  # The idea here is that we render a template once to get the hostname in the
+  # main page and then copy it into place. This way, the tilde admin can manage
+  # the index.html file however they want but still get a nice default page as
+  # part of using puppet-tilde. This is the most straightforward way I could
+  # think of doing that...
+  file { 'rendered_mainpage':
     ensure => file,
-    path => "${www_root}/index.html",
+    path => '/tmp/tilde_rendered_mainpage.html',
     content => template("${module_name}/main_index.erb"),
-    #source => "puppet:///modules/${module_name}/main_index.html",
+  } ->
+  exec { 'initial main page':
+    command => "/bin/cp /tmp/tilde_rendered_mainpage.html ${www_root}/index.html",
+    creates => "${www_root}/index.html",
   }
 
   nginx::resource::vhost { $hostname:
