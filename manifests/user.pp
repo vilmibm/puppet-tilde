@@ -8,7 +8,6 @@ define tilde::user ($pubkey_type = 'ssh-rsa', $pubkey) {
     ensure => present,
     managehome => true, # pick up our skel
     groups => ['town'],
-    shell => '/bin/bash',
     #notify => Exec["${username}_setquota"],
   }
 
