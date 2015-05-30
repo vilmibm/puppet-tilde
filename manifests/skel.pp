@@ -1,5 +1,5 @@
 class tilde::skel {
-  
+
   file { 'skel':
     ensure => directory,
     path => '/etc/skel',
@@ -8,5 +8,5 @@ class tilde::skel {
     owner => 'root',
     group => 'root',
   }
-  
+
 }
