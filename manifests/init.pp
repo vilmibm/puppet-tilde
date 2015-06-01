@@ -41,9 +41,11 @@ class tilde (
     ensure => present,
   }
 
-  tilde:templatedfile { 'rendered motd':
-    template => "${module_name}/motd.erb",
+  file { 'motd':
+    ensure => file,
+    replace => false,
     path => "/etc/motd",
+    content => template("${module_name}/motd.erb")
   }
 
   create_resources(tilde::user, $users)

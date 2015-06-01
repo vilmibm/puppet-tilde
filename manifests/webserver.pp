@@ -7,9 +7,11 @@ class tilde::webserver ($hostname) {
     ensure => directory,
   }
 
-  tilde::templatedfile { 'rendered main page':
-    template => "${module_name}/basic_main_index.erb",
-    path => "${www_root}/index.html"
+  file { 'index page':
+    ensure => file,
+    replace => false,
+    path => "${www_root}/index.html",
+    content => template("${module_name}/basic_main_index.erb")
   }
 
   nginx::resource::vhost { $hostname:
