@@ -39,12 +39,9 @@ class tilde (
     ensure => present,
   }
 
-  file { "/etc/motd":
-    ensure => file,
-    owner => root,
-    group => root,
-    mode => '0665',
-    content => template("${module_name}/motd.erb")
+  tilde:templatedfile { 'rendered motd':
+    template => "${module_name}/motd.erb",
+    path => "/etc/motd",
   }
 
   create_resources(tilde::user, $users)
