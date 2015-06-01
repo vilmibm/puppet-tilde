@@ -11,9 +11,12 @@ class tilde (
   include tilde::packages
   include tilde::mail
   include tilde::skel
-  include tilde::irc
 
   File { backup => false, }
+
+  class { 'tilde::irc':
+    hostname => $hostname,
+  }
 
   class { 'tilde::nntp':
     hostname => $hostname,
