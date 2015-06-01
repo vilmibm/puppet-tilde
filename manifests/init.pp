@@ -28,8 +28,8 @@ class tilde (
     include tilde::quota
   }
 
-  group { 'town':
-    ensure => present,
+  if ($enable_wiki) {
+    include tilde::wiki
   }
 
   resources { 'user':
