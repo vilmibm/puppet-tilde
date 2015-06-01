@@ -15,7 +15,7 @@ to date as I change things / add features.
  * Install the `puppet` and `puppetmaster` packages (they can be on the same
    server). 3.4.x+ is required.
  * `puppet module install jfryman-nginx -v 0.0.10` (must install v0.0.10, [see here](https://github.com/jfryman/puppet-nginx/issues/460))
- * `apt-get install -y puppetmaster puppet`.
+ * `apt-get install -y puppetmaster puppet git-core`.
  * `puppet module install camptocamp-postfix`
  * Set up hiera:
   * add a [hiera.yaml](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/hiera.yaml) to `/etc/puppet/`
@@ -23,7 +23,6 @@ to date as I change things / add features.
   * `mkdir /etc/puppet/hieradata`
   * add and **configure** [common.yaml](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/common.yaml) to `/etc/puppet/hieradata/`
  * `cd /etc/puppet/modules`
- * `apt-get install -y git-core`
  * `git clone https://github.com/nathanielksmith/puppet-tilde.git tilde`
  * `git clone https://github.com/nathanielksmith/puppet-ngircd ngircd`
  * edit [site.pp](https://github.com/nathanielksmith/puppet-tilde/tree/master/examples/site.pp) and save to `/etc/puppet/manifests/site.pp`
@@ -91,10 +90,10 @@ mail only. Alpine and mutt are installed by default.
 
 ## MotD
 
-There is basic Message of the Day support. To customize the motd, make
-a branch of the checked out puppet module and edit
-`templates/motd.erb`. The default template just has a basic cowsay
-with a few instructions (and shows your server's hostname).
+There is basic Message of the Day support. The motd is laid out for you but you
+can directly edit it at `/etc/motd`. Puppet does not manage the file after first
+generating it. The included template just has a basic cowsay with a few
+instructions (and shows your server's hostname).
 
 A `motd` alias that just runs `cat /etc/motd` is also added by the
 aliases file in `/etc/skel`.
@@ -109,9 +108,9 @@ The program `inn2` is set up and configured for local access. The clients `slrn`
 
 ## Quota support
 
-This module enables 3mb user quotas for all non-system users. You'll
-need to add the usrquota option to your / mount with something like
-this in your `site.pp`, though, for it to work:
+This module can enable 3mb user quotas for all non-system users. You'll need to
+add the usrquota option to your / mount with something like this in your
+`site.pp`, though, for it to work:
 
     mount { '/':
         ensure  => 'mounted',
@@ -124,23 +123,36 @@ this in your `site.pp`, though, for it to work:
       }
     }
 
-If you **do not want disk quotas**, include the tilde class like this
-in your `site.pp`:
+Quota is opt in. Enable it in `site.pp` like so:
 
     class { 'tilde':
-        use_quota => false,
+        enable_quota => true,
     }
 
 Or configure `common.yaml` with:
 
-    tilde::use_quota: false
+    tilde::enable_quota: true 
+
+## Bootleg wiki
+
+A pseudo-user, `wiki`, with a world-editable home directory serves as a janky
+sort of wiki. Adding version control after the fact is recommended. Enable this
+via site.pp with:
+
+    class { 'tilde':
+        enable_wiki => true,
+    }
+
+Or configure `common.yaml` with:
+
+    tilde::enable_wiki: true 
 
 ## TODO
 
- * A "customization" section in this README on how to modify things
-   like the server's homepage or `/etc/skel`.
  * Flags for switching on/off various services from `common.yaml` (if
    you don't want NTTP, for example).
+ * Support for non-ubuntu OSes
+ * (tested) support for non-ec2 platforms
 
 ## Authors
 
