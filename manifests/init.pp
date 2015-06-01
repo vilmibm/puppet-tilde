@@ -45,6 +45,9 @@ class tilde (
   file { 'motd':
     ensure => file,
     replace => false,
+    mode => '0665',
+    owner => 'root',
+    gourp => 'root',
     path => "/etc/motd",
     content => template("${module_name}/motd.erb")
   }
