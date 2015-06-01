@@ -1,7 +1,8 @@
 class tilde (
   $users,
   $hostname,
-  $use_quota = true,
+  $enable_quota = false,
+  $enable_wiki = false,
   $addtl_packages = [],
   $newsgroups = [],
   $newspeers = []
@@ -24,8 +25,8 @@ class tilde (
     hostname => $hostname,
   }
 
-  if ($use_quota) {
-    include tilde::quota
+  class { 'tilde::quota':
+    enabled => $enable_quota,
   }
 
   if ($enable_wiki) {
