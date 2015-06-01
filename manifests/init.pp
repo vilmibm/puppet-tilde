@@ -12,6 +12,8 @@ class tilde (
   include tilde::skel
   include tilde::irc
 
+  File { backup => false, }
+
   class { 'tilde::nntp':
     hostname => $hostname,
     newsgroups => $newsgroups,
