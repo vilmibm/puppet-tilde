@@ -38,6 +38,12 @@ class tilde::nntp ($hostname, $newsgroups = [], $peers = []) {
     content => $hostname,
   }
 
+  file { '/etc/news/expire.ctl':
+    ensure => file,
+    require => Package['inn2'],
+    source => "puppet:///modules/${module_name}/expire.ctl",
+  }
+
   service { 'inn2':
     ensure => running,
     status => '/usr/sbin/innstat | /bin/grep "Server running"',
